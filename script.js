@@ -149,6 +149,22 @@
     }
   }
 
+  function initMap() {
+    const mapEl = document.getElementById("site-map");
+    if (!mapEl || typeof L === "undefined") return;
+
+    const center = [25.0339, 121.5645];
+    const map = L.map(mapEl).setView(center, 14);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    L.marker(center).addTo(map).bindPopup("台北 101");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initTheme();
     if (themeToggle) {
@@ -158,5 +174,6 @@
     initSmoothScroll();
     initReveal();
     initYear();
+    initMap();
   });
 })();
